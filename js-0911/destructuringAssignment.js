@@ -51,6 +51,15 @@ console.log(drink);
 console.log(eat);
 
 // 객체 구조 분해 : 기본값
-// let user10 = {name: "Tommy"};
-// let {name, age = 20, gender = "male"} = user10;
-// console.log(user10.age);
+let user10 = {name: "Tommy", age: 30, gender: "female"};
+let {name, age = 20, gender = "male"} = user10;
+console.log(user10);
+
+// 할당 연산자 우측엔 모든 이터러블이 올 수 있다.
+let [d,e,f] = "def";
+console.log(d);
+
+// 할당 연산자 좌측엔 모든지 올 수 잇다.
+let ooffee = {};
+[ooffee.music, ooffee.dessert] =  "Iced coffee".split(' ');
+console.log(ooffee.music);
