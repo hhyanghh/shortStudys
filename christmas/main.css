@@ -1,11 +1,15 @@
 .snowflake {
-  width: 8px;
-  height: 8px;
+  width: 36px;
+  height: 36px;
   border-radius: 50%;
   background-color: white;
   position: absolute;
-  top: -8px;
-  /* animation: fall 10s linear; */
+  top: -40px;
+  cursor: pointer;
+}
+.snowflake.mouseover {
+  transform: scale(2);
+  transition: transform 2s;
 }
 
 @keyframes fall {
