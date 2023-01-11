@@ -156,3 +156,29 @@
   }
   topSalary(salaries);
 }
+
+// 객체의 깊숙한 곳에 들어있는 값을 꺼내기
+{
+  const deepObject = {
+    state: {
+      information: {
+        name: "hyunhwa",
+        language: ["korean", "english", "franch"],
+      },
+    },
+    value: 5,
+  };
+
+  // name이랑 language 꺼내기
+  const { name, language } = deepObject.state.information;
+  const { value } = deepObject;
+
+  // 이렇게도 쓸 수 있다.
+  const extracted = {
+    name,
+    language,
+    value,
+  };
+
+  console.log(extracted);
+}
