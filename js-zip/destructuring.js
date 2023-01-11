@@ -182,3 +182,58 @@
 
   console.log(extracted);
 }
+
+// quiz1
+{
+  const person = {
+    name: "hyunhwa",
+    age: 11,
+    gender: "female",
+    interests: ["movie", "coffee"],
+  };
+
+  const { name: n, age: a, gender } = person;
+
+  // hyunhwa의 변수명은?
+}
+
+//
+
+// quiz2
+{
+  // ootd 객체의 값들을 전달받느 showTodaysOotd 함수 만들기
+  // (ootd 객체에는 없는 bottom 은 jeans로 전달하기)
+  const ootd = {
+    top: "stripe tee",
+    shoes: "ugg",
+    outer: "coat",
+    accessories: ["ring", "watch"],
+  };
+
+  function showTodaysOotd() {
+    console.log(top);
+    console.log(bottom);
+    console.log(accessories);
+  }
+
+  showTodaysOotd();
+}
+
+// quiz2 정답
+{
+  //
+  const ootd = {
+    top: "stripe tee",
+    shoes: "ugg",
+    outer: "coat",
+    accessories: ["ring", "watch"],
+  };
+
+  function showTodaysOotd({ top, bottom = "jeans", outer, accessories }) {
+    console.log(top);
+    console.log(bottom);
+    console.log(accessories);
+  }
+
+  showTodaysOotd(ootd);
+}
