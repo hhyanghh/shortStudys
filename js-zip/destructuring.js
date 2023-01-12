@@ -210,13 +210,13 @@
     accessories: ["ring", "watch"],
   };
 
-  function showTodaysOotd() {
-    console.log(top);
-    console.log(bottom);
-    console.log(accessories);
-  }
+  // function showTodaysOotd() {
+  //   console.log(top);
+  //   console.log(bottom);
+  //   console.log(accessories);
+  // }
 
-  showTodaysOotd();
+  // showTodaysOotd();
 }
 
 // quiz2 정답
@@ -236,4 +236,27 @@
   }
 
   showTodaysOotd(ootd);
+}
+
+{
+  const [, ...flowers] = ["🌚", "🌼", "🌸", "🌹"];
+  console.log(flowers);
+}
+
+{
+  function* oddGenerator() {
+    for (let i = 0; i < 10; i++) {
+      if (i % 2) yield i;
+    }
+  }
+
+  let oddIter = oddGenerator();
+
+  // oddIter는 object
+  let one = oddIter.next();
+  console.log(one, "one");
+
+  let two = oddIter.next();
+  console.log(two, "two");
+  console.log(...oddIter);
 }
