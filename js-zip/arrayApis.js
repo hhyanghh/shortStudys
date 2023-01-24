@@ -15,6 +15,9 @@ const students = [
   new Student("E", 19, true, 88),
 ];
 
+const numbers = [1, 2, 3, 4, 5, 6, 7];
+const fruits = ["딸기", "사과", "바나나", "배", "딸기", "메론"];
+
 const result = students.find((student) => student.score === 90);
 console.log(result);
 
@@ -41,3 +44,27 @@ console.log(ascendingOrderScore);
 console.log([11, 2, 22, 1].sort((a, b) => a - b));
 
 console.log(["dream", "coding"].flatMap((text) => text.split("")));
+
+const evenNumber = numbers.filter((num) => num % 2 === 0);
+console.log(evenNumber);
+
+// 학생들의 점수가 80점 이상인 학생들만
+const lessThan80Score = students.filter((student) => student.score >= 80);
+console.log(lessThan80Score);
+
+console.clear();
+const reduceResult = numbers.reduce((acc, cur, idx, src) => {
+  console.log("acc: ", acc, "cur :", cur, "idx :", idx);
+
+  return acc + cur;
+}, 0);
+console.log(reduceResult);
+console.clear();
+
+const reduceRepeat = fruits.reduce((acc, cur) => {
+  if (acc.includes(cur) === false) {
+    acc.push(cur);
+  }
+  return acc;
+}, []);
+console.log(reduceRepeat);
