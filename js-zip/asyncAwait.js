@@ -51,21 +51,12 @@
 //   .then((post) => console.log(post))
 //   .catch((error) => console.log("error:", error));
 
-async function buttonClickHandler() {
-  await work1();
-  console.log("클릭했어요");
-}
+// buttonClickHandler();
 
-function work1() {
-  return new Promise((resolve) => {
-    setTimeout(() => {
-      console.log("작업 끝");
-      resolve();
-    }, 5000);
-  });
-}
-
-buttonClickHandler();
+// async function buttonClickHandler() {
+//   const result = await work1();
+//   console.log("클릭했어요");
+// }
 
 // let printNum = (number, delaySec) => {
 //   return new Promise((resolve) =>
@@ -83,3 +74,44 @@ buttonClickHandler();
 // };
 
 // logPrintNum(1, 5);
+
+{
+  buttonClickHandler();
+  function work() {
+    return new Promise((resolve) => {
+      setTimeout(() => {
+        resolve();
+        console.log("작업끝");
+      }, 5000);
+    });
+  }
+  async function buttonClickHandler() {
+    await work();
+    console.log("클릭했어요!");
+  }
+}
+{
+  // 반복문 , async await
+  // const fruitBasket = {
+  //   apple: 27,
+  //   grape: 0,
+  //   pear: 14,
+  // };
+  // const sleep = (ms) => {
+  //   return new Promise((resolve) => setTimeout(resolve, ms));
+  // };
+  // const getNumFruit = (fruit) => {
+  //   return sleep(1000).then((v) => fruitBasket[fruit]);
+  // };
+  // const fruitsToGet = ["apple", "grape", "pear"];
+  // const work1 = async () => {
+  //   console.log("Start");
+  //   for (let i = 0; i < fruitsToGet.length; i++) {
+  //     const fruit = fruitsToGet[i];
+  //     const numFruit = await getNumFruit(fruit);
+  //     console.log(numFruit);
+  //   }
+  //   console.log("end");
+  // };
+  // work1();
+}
