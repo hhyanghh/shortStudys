@@ -1,0 +1,37 @@
+<html>
+  <body>
+    <style>
+      .container {
+        border: 5px solid black;
+        padding: 10px;
+      }
+    </style>
+    <div id="red"></div>
+    <div id="greend"></div>
+    <script>
+      function red() {
+        document.querySelector("#red").innerHTML = `
+						<div class="container" id="component_red">
+								<h1>red</h1>
+								<input type='button' value='fire' onclick="
+									document.querySelector('#component_red').style.backgroundColor= 'red'
+								" >
+							</div>
+				`;
+      }
+      red();
+
+      function green() {
+        document.querySelector("#green").innerHTML = `
+						<div class="container" id="component_green">
+								<h1>red</h1>
+								<input type='button' value='fire' onclick="
+									document.querySelector('#component_green').style.backgroundColor= 'green'
+								" >
+							</div>
+				`;
+      }
+      green();
+    </script>
+  </body>
+</html>
