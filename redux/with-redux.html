@@ -12,10 +12,17 @@
     <div id="red"></div>
     <script>
       function reducer(state, action) {
+        console.log(state, action);
         if (state === undefined) {
           // 초기값, 최초 초기화 단계
           return { color: "yellow" };
         }
+        let newState;
+        if (action.type === "CHANGE_COLOR") {
+          // state값을 복제해서 값을 변경하고 return 하기
+          newState = Object.assign({}, state, { color: "red" });
+        }
+        return newState;
       }
       const store = Redux.createStore(reducer);
       console.log(store.getState());
@@ -26,7 +33,7 @@
         		<div class='container' id='component_red' style='background-color:${state.color}'>
         			<h1>red</h1>
         			<input type='button' value='fire' onclick="
-        				document.querySelector('#component_red').style.backgroundColor = 'red';
+								store.dispatch({type:'CHANGE_COLOR', color: 'red'});
 								"
         			>
         		</div>
