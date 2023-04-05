@@ -1,5 +1,7 @@
 <html>
-  <head> </head>
+  <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/redux/4.2.1/redux.js"></script>
+  </head>
   <body>
     <div id="subject"></div>
     <div id="toc"></div>
@@ -16,16 +18,27 @@
       }
       subject();
       function TOC() {
+        const state = store.getState();
+        let i = 0;
+        let liTags = "";
+        while (i < state.contents.length) {
+          liTags =
+            liTags +
+            `
+						<li>
+							<a href="${state.contents[i].id}">${state.contents[i].title}</a>	
+						</li>
+					`;
+          i = i + 1;
+        }
+        console.log(state);
         document.querySelector("#toc").innerHTML = `
 					<nav>
-						<ol>
-							<li><a href="1.html">HTML</a></li>
-							<li><a href="1.html">CSS</a></li>
-						</ol>
+						<ol>${liTags}</ol>
 					</nav>
 				`;
       }
-      TOC();
+
       function control() {
         document.querySelector("#control").innerHTML = `
 					<ul>
@@ -44,6 +57,21 @@
 				`;
       }
       article();
+
+      function reducer(state, action) {
+        if (state === undefined) {
+          return {
+            contents: [
+              { id: 1, title: "사시미", desc: "사시미는 맛있다." },
+              { id: 2, title: "스시", desc: "스시는 맛있다." },
+            ],
+          };
+        }
+        return;
+      }
+
+      const store = Redux.createStore(reducer);
+      TOC();
     </script>
   </body>
 </html>
