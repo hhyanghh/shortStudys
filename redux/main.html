@@ -10,68 +10,136 @@
     <script>
       function subject() {
         document.querySelector("#subject").innerHTML = `
-				<header>
-					<h1>WEB</h1>
-					Hello, WEB!
-				</header>
-			`;
+      	<header>
+      		<h1>WEB</h1>
+      		Hello, WEB!
+      	</header>
+      `;
       }
-      subject();
+
       function TOC() {
-        const state = store.getState();
-        let i = 0;
-        let liTags = "";
+        var state = store.getState();
+        var i = 0;
+        var liTags = "";
         while (i < state.contents.length) {
           liTags =
             liTags +
             `
-						<li>
-							<a href="${state.contents[i].id}">${state.contents[i].title}</a>	
-						</li>
-					`;
+      			<li>
+      				<a onclick="
+      					event.preventDefault();
+      					var action = {type: 'SELECT', id: ${state.contents[i].id}}
+      					store.dispatch(action);
+      				" href="${state.contents[i].id}">${state.contents[i].title}</a>
+      			</li>
+      		`;
           i = i + 1;
         }
-        console.log(state);
         document.querySelector("#toc").innerHTML = `
-					<nav>
-						<ol>${liTags}</ol>
-					</nav>
-				`;
+      		<nav>
+      			<ol>${liTags}</ol>
+      		</nav>
+      	`;
       }
 
       function control() {
         document.querySelector("#control").innerHTML = `
-					<ul>
-						<li><a href="/create">create</a></li>
-						<li><input type="button" value="delete" /></li>
-					</ul>
-				`;
+      		<ul>
+      			<li><a onclick="
+                   event.preventDefault();
+
+                 " href="/create">create</a></li>
+      			<li><input type="button" value="delete" /></li>
+      		</ul>
+      	`;
       }
-      control();
+
       function article() {
-        document.querySelector("#content").innerHTML = `
-					<article>
-						<h2>HTML</h2>
-						HTML is...
-					</article>
-				`;
+        var state = store.getState();
+        if (state.mode === "create") {
+          <article>
+            <form
+              onsubmit="
+                event.preventDefault();
+                var _title = this.title.value;
+                var _desc = this.desc.value;
+                store.dispatch({
+                  type: 'CREATE', 
+                  title: _title,
+                  desc: _desc
+                })
+            "
+            >
+              <p>
+                <input type="text" name="title" placeholder="title" />
+              </p>
+              <p>
+                <textarea name="desc" placeholder="description"></textarea>
+              </p>
+              <p>
+                <input type="submit" />
+              </p>
+            </form>
+          </article>; //
+        } else if (state.mode === "read") {
+          var i = 0;
+          var aTitle, aDesc;
+          while (i < state.contents.length) {
+            if (state.contents[i].id === state.selected_id) {
+              aTitle = state.contents[i].title;
+              aDesc = state.contents[i].desc;
+              break;
+            }
+          }
+          document.querySelector("#content").innerHTML = `
+      		<article>
+      			<h2>${aTitle}</h2>
+            ${aDesc}
+      		</article>
+      	`;
+        }
       }
-      article();
 
       function reducer(state, action) {
         if (state === undefined) {
           return {
+            max_id: 2,
+            mode: "create",
+            selected_id: null,
             contents: [
               { id: 1, title: "사시미", desc: "사시미는 맛있다." },
               { id: 2, title: "스시", desc: "스시는 맛있다." },
             ],
           };
         }
-        return;
+        var newState;
+        if (action.type === "SELECT") {
+          newState = Object.assign({}, state, { selected_id: action.id });
+        } else if (action.type === "CREATE") {
+          var newMaxId = state.max_id + 1;
+          var newContents = state.contents.concat();
+          newContents.push({
+            title: action.title,
+            desc: action.desc,
+            id: null,
+          });
+          Object.assign({}, state, {
+            max_id: newMaxId,
+            contents: newContents,
+            mode: "read",
+          });
+        }
+        console.log(action, state, newState);
+        return newState;
       }
 
-      const store = Redux.createStore(reducer);
+      var store = Redux.createStore(reducer);
+      store.subscribe(article);
+      store.subscribe(TOD);
+      subject();
       TOC();
+      control();
+      article();
     </script>
   </body>
 </html>
