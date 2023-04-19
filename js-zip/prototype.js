@@ -7,7 +7,7 @@ const JellyLeadingStudy = function (name, joinDate) {
 };
 
 JellyLeadingStudy.prototype = {
-  // constructor: JellyLeadingStudy,
+  constructor: JellyLeadingStudy,
   company: "FASSTO",
   team: "FRONT",
   like() {
@@ -17,10 +17,10 @@ JellyLeadingStudy.prototype = {
 
 const 현화 = new JellyLeadingStudy("현화", "2022-12");
 const 하은 = new JellyLeadingStudy("하은", "2022-12");
-const 희정 = new JellyLeadingStudy("희정", "2023-04");
+const 희정 = new JellyLeadingStudy("희정", "2023-03");
 const 보연 = new JellyLeadingStudy("보연", "2023-04");
 const 재경 = new JellyLeadingStudy("재경", "2023-04");
-console.log(현화.n);
+console.log(현화.getName());
 console.log(현화.team);
 console.log(현화.like());
 console.log(보연.like());
@@ -33,5 +33,15 @@ console.log(현화 instanceof JellyLeadingStudy);
 console.log(현화.constructor === JellyLeadingStudy);
 
 // 이름은 바꿀 수 없어야한다. (closure 복습!)
-현화.n = "양야라양";
-console.log(현화.n);
+
+for (p in 현화) {
+  console.log(p);
+}
+for (p in 현화) {
+  if (현화.hasOwnProperty(p)) {
+    console.log("o", p);
+  } else {
+    console.log("x", p);
+  }
+}
+console.log(Object.keys(현화));
